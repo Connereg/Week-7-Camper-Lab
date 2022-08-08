@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -24,8 +24,8 @@ public class Activity {
     private String name;
     @NotNull
     private int difficulty;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private Date created_at;
+    private Date updated_at;
 
     @OneToMany(mappedBy = "activity")
     private List<Signup> signupList = new ArrayList<>();

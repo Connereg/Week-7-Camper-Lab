@@ -35,11 +35,4 @@ public class Camper {
     @OneToMany(mappedBy = "camper")
     private List<Signup> signupList = new ArrayList<>();
 
-    public void setCreated_at(Date date) {
-        this.created_at = date;
-    }
-
-    public void setUpdated_at(Date date) {
-        this.updated_at = date;
-    }
 }

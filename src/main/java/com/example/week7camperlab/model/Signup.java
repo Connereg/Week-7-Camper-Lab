@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -23,8 +23,8 @@ public class Signup {
     @Min(value = 0)
     @Max(23)
     private int time;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private Date created_at;
+    private Date updated_at;
 
     @ManyToOne
     private Activity activity;

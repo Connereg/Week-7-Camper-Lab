@@ -1,13 +1,15 @@
 package com.example.week7camperlab.controller;
 
+import com.example.week7camperlab.dto.CreateSignupDTO;
+import com.example.week7camperlab.dto.GetActivitiesDTO;
 import com.example.week7camperlab.model.Signup;
 import com.example.week7camperlab.service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/camp")
@@ -16,9 +18,9 @@ public class SignupController {
     SignupService signupService;
 
     @PostMapping("/signups")
-    public ResponseEntity<Signup> createSignup(@RequestBody Signup signup) {
-        Signup newSignup = signupService.createSignup(signup);
-        return ResponseEntity.ok(newSignup);
+    public ResponseEntity<GetActivitiesDTO> createSignup(@Valid @RequestBody CreateSignupDTO createSignupDTO) {
+        GetActivitiesDTO activityDTO = signupService.createSignup(createSignupDTO);
+        return ResponseEntity.ok(activityDTO);
     }
 
 }

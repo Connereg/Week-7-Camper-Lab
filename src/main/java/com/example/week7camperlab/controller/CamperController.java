@@ -1,10 +1,16 @@
 package com.example.week7camperlab.controller;
 
+import com.example.week7camperlab.dto.CreateCamperDTO;
+import com.example.week7camperlab.dto.GetCamperDTO;
+import com.example.week7camperlab.dto.GetCampersDTO;
 import com.example.week7camperlab.model.Camper;
 import com.example.week7camperlab.service.CamperService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.Date;
 
 import java.time.LocalDateTime;
@@ -17,32 +23,33 @@ public class CamperController {
     CamperService camperService;
 
     @PostMapping("/campers")
-    public ResponseEntity<Camper> createCamper(@RequestBody Camper camper) {
-        Camper newCamper = camperService.createCamper(camper);
-        newCamper.setCreated_at(new Date());
-        return ResponseEntity.ok(newCamper);
+    public ResponseEntity<GetCampersDTO> createCamper(@Valid @RequestBody CreateCamperDTO createCamperDTO) {
+        GetCampersDTO camperDTO = camperService.createCamper(createCamperDTO);
+        return ResponseEntity.ok(camperDTO);
     }
 
     @GetMapping("/campers")
-    public List<Camper> readCampers() {
+    public List<GetCampersDTO> readCampers() {
         return camperService.getCampers();
     }
 
     @GetMapping("/campers/{camperId}")
-    public Camper readCamper(@PathVariable(value = "camperId") Integer id ) {
-        return camperService.getCamper(id);
+    public GetCamperDTO getCamper(@PathVariable(value = "camperId") Integer id ) {
+        GetCamperDTO camperDTO = camperService.getCamper(id);
+        return camperDTO;
 
     }
 
-    @PutMapping("/campers/{camperId}")
-    public Camper updateCamper(@PathVariable(value = "camperId") Integer id, @RequestBody Camper camperData ) {
-        camperData.setUpdated_at(new Date());
-        return camperService.updateCamper(id, camperData);
-    }
+//    @PutMapping("/campers/{camperId}")
+//    public Camper updateCamper(@PathVariable(value = "camperId") Integer id, @RequestBody Camper camperData ) {
+//        return camperService.updateCamper(id, camperData);
+//    }
+//
+//    @DeleteMapping("/campers/{camperId}")
+//    public void deleteCamper(@PathVariable(value = "camperId") Integer id) {
+//        camperService.deleteCamper(id);
+//    }
 
-    @DeleteMapping("/campers/{camperId}")
-    public void deleteCamper(@PathVariable(value = "camperId") Integer id) {
-        camperService.deleteCamper(id);
-    }
+
 
 }
