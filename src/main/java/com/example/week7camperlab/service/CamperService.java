@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +52,11 @@ public class CamperService {
         Camper camper = optionalCamper.get();
         GetCamperDTO camperDTO = mapper.map(camper, GetCamperDTO.class);
         List<Signup> signups = camper.getSignupList();
-        List<Activity> activities = signups.stream().map(signup -> signup.getActivity()).toList();
+        List<Activity> activities = new ArrayList<>();
+        for (Signup signup : signups) {
+            Activity activity = signup.getActivity();
+            activities.add(activity);
+        }
         for(int i = 0; i < activities.size(); i++) {
             GetActivitiesDTO activityDTO = mapper.map(activities.get(i), GetActivitiesDTO.class);
             camperDTO.addActivityDTO(activityDTO);

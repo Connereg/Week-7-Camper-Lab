@@ -7,6 +7,7 @@ import com.example.week7camperlab.repository.ActivityRepository;
 import com.example.week7camperlab.repository.SignupRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,8 +39,8 @@ public class ActivityService {
     public Activity getActivity(Integer activityId) {
         return activityRepository.findById(activityId).get();
     }
-
-    public void deleteActivity(Integer id) {
-        activityRepository.deleteById(id);
-    }
+//
+//    public void deleteActivity(Integer id) {
+//        activityRepository.deleteById(id);
+//    }
 }
